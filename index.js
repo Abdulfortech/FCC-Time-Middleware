@@ -1,19 +1,7 @@
-const express = require('express');
-const app = express();
+const app = require('./myApp'); // Import the app
+const PORT = process.env.PORT || 3000; // Use environment port or default to 3000
 
-// Middleware to add current time to request object
-const addTimeMiddleware = (req, res, next) => {
-    req.time = new Date().toString();
-    next();
-};
-
-// Chained route with middleware and handler
-app.get('/now', addTimeMiddleware, (req, res) => {
-    res.json({ time: req.time });
-});
-
-// Start the server (optional, for testing purposes)
-const PORT = 3000;
+// Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
