@@ -7,8 +7,18 @@ const addTimeMiddleware = (req, res, next) => {
   next();
 };
 
+// app.get('/user', function(req, res, next) {
+//     req.user = getTheUserSync();  // Hypothetical synchronous operation
+//     next();
+//   }, function(req, res) {
+//     res.send(req.user);
+//   });
+
 // Chaining middleware and handler in the '/now' route
-app.get('/now', addTimeMiddleware, (req, res) => {
+app.get('/now', function(req, res, next) {
+    req.time = new Date().toString();
+    next();
+  }, function(req, res) {
   res.json({ time: req.time });
 });
 
